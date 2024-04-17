@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "Spark.PropertyTypes.Grpc";
+
+import "google/protobuf/empty.proto";
+
+
+service PropertyTypesService {
+    rpc GetPropertyTypes (google.protobuf.Empty) returns (GetPropertyTypesResponse);
+    rpc GetContextPropertyMappings(google.protobuf.Empty) returns (GetContextPropertyMappingResponse);
+}
+
+message PropertyMapping {
+    int32 propertyTypeId = 1;
+    string name = 2;
+    int32 parentPropertyTypeId = 3;
+}
+
+message GetPropertyTypesResponse {
+  repeated PropertyMapping mappings = 1;
+}
+
+message ContextMappingData {
+  int32 id = 1;
+  string contextName = 2;
+  int32 propertyTypeId = 3;
+  int32 parentPropertyTypeId = 4;
+}
+
+message GetContextPropertyMappingResponse {
+  repeated ContextMappingData contextMappings = 1;
+}
